@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ΕυΒάρδια · Υποστήριξη επαγγελματιών υγείας</title>
+<style>
+:root{color-scheme:light;--ink:#163b35;--muted:#4d665f;--line:#d4e2db;--paper:#f4f7f3;--accent:#165e50}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 "Inter",system-ui,sans-serif}header{background:#123b33;color:white}nav,main{width:min(1100px,calc(100% - 36px));margin:auto}nav{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:17px 0;font-weight:650}main{padding:42px 0}.intro{margin-bottom:25px}h1{font-size:clamp(30px,5vw,52px);line-height:1.1;max-width:750px;margin:0 0 13px;letter-spacing:-.04em}h2{font-size:22px;margin:0 0 10px}p{margin:0 0 13px}.muted,small{color:var(--muted)}.demo{padding:16px 20px;background:#e4eee6;border:1px solid var(--line);border-radius:15px;margin-bottom:20px}.demo label{display:block;margin-bottom:5px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:24px}.support{margin-top:20px;background:#eef4ee}label{font-weight:650}select,button,input{font:inherit}select,input[type=date]{width:100%;background:white;color:var(--ink);border:1px solid #91aaa0;border-radius:8px;padding:9px}fieldset{border:0;margin:17px 0;padding:0}legend{font-weight:650;margin-bottom:6px}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.scale label{display:grid;place-items:center;min-height:42px;border:1px solid #a0b6ad;border-radius:8px;cursor:pointer;position:relative}.scale label:has(:checked){background:#d6ece4;border-color:var(--accent)}.scale input{position:absolute;opacity:0}.scale label:has(:focus-visible){outline:3px solid #aa681a;outline-offset:2px}.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}button{border:1px solid var(--accent);border-radius:9px;background:var(--accent);color:white;padding:9px 15px;cursor:pointer;font-weight:650}header button{border-color:#accec1;background:transparent}button.secondary{background:white;color:var(--accent)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #aa681a;outline-offset:3px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}caption{text-align:left;font-weight:650;margin:12px 0 4px}th,td{padding:7px 4px;border-bottom:1px solid var(--line)}td:first-child{white-space:nowrap}.bars{list-style:none;padding:0;margin:16px 0}.bars li{display:grid;grid-template-columns:52px 1fr 40px;gap:8px;align-items:center;margin:7px 0;font-size:14px}meter{width:100%;height:18px;accent-color:var(--accent)}.status{min-height:1.5em;margin:9px 0 0}.panel{padding:15px;border:1px solid var(--line);background:white;border-radius:10px;margin-top:14px}.panel p:last-child{margin-bottom:0}@media(max-width:720px){.grid{grid-template-columns:1fr}main{padding-top:28px}.card{padding:18px}nav{font-size:14px}}
+
+.wearable{margin-top:20px}.wearable-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}.wearable-state{border:1px solid var(--line);border-radius:40px;padding:4px 12px;font-size:14px;font-weight:650;background:#eef4ee}.wearable-state[data-state=delayed]{background:#fff3da;color:#664b15}.wearable-controls{display:grid;grid-template-columns:minmax(150px,1fr) minmax(150px,1fr);gap:12px;max-width:640px;margin:12px 0}.readings{display:grid;grid-template-columns:repeat(3,1fr);margin:15px 0;gap:10px}.readings div{padding:12px;background:var(--paper);border-radius:9px}.readings dt{color:var(--muted);font-size:14px}.readings dd{margin:0;font-size:21px;font-weight:650}.wearable-meta{font-size:14px}@media(max-width:520px){.wearable-controls{grid-template-columns:1fr}.readings{grid-template-columns:1fr}}
+
+.brand{font-size:clamp(22px,4vw,30px);font-weight:750;letter-spacing:-.035em}.quick-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.quick-links a{color:var(--accent);background:white;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-weight:650}.quick-links a:focus-visible,[tabindex="-1"]:focus-visible{outline:3px solid #aa681a;outline-offset:3px}@media(max-width:420px){nav{gap:8px}header button{font-size:13px;padding:8px 9px}.tablewrap table{font-size:12px}}
+.voice-panel{margin:14px 0}.voice-panel summary{cursor:pointer;font-weight:650}.voice-panel select{margin:4px 0 10px}.voice-panel .toolbar button{margin-bottom:4px}button:disabled{opacity:.55;cursor:default}
+</style>
+</head>
+<body>
+<header><nav><span class="brand">ΕυΒάρδια</span><button id="supportLink" type="button">Θέλω να μιλήσω με κάποιον</button></nav></header>
+<main>
+<div class="intro"><h1>Πώς πήγε η βάρδια σου;</h1><p class="muted">Ένα σύντομο check-in για την εργασιακή εξάντληση, τον ύπνο και τον φόρτο της βάρδιας.</p><div class="quick-links"><a href="#checkinTitle">Κάνε check-in</a><a href="#overviewTitle">Δες την επισκόπηση</a><a href="#wearableTitle">Δοκίμασε το ρολόι</a></div></div>
+<div class="demo"><strong>Ερευνητικό πρωτότυπο · Τοπική δοκιμή</strong><p>Χρησιμοποίησε μόνο συνθετικά δεδομένα. Η προσωπική επισκόπηση εμφανίζει τις τιμές της τρέχουσας συνεδρίας. Η βάση αποθηκεύει συμβάντα χρήσης.</p><div class="toolbar"><button id="study-logout" type="button" class="secondary">Αποσύνδεση από τη μελέτη</button><button id="study-retry" type="button" class="secondary" hidden>Επανάληψη αποστολής</button></div><p id="study-status" role="status"></p></div>
+<div class="grid">
+<section class="card"><h2 id="checkinTitle" tabindex="-1">Σύντομο check-in</h2><form id="checkin"><label for="date">Ημερομηνία check-in</label><input id="date" name="date" type="date" required><details class="panel voice-panel" id="voice-panel">
+<summary>Φωνητικό check-in</summary>
+<p class="muted">Διάλεξε ερώτηση και πες έναν αριθμό από το 1 έως το 5. Επιβεβαίωσε την τιμή πριν περάσει στη φόρμα.</p>
+<label for="voice-question">Ερώτηση</label><select id="voice-question"></select>
+<div class="toolbar"><button type="button" class="secondary" id="voice-read">Εκφώνηση</button><button type="button" id="voice-listen" disabled>Πάτησε και μίλησε</button><button type="button" class="secondary" id="voice-cancel" hidden>Ακύρωση ακρόασης</button></div>
+<p id="voice-status" role="status">Έλεγχος τοπικής αναγνώρισης ελληνικών…</p>
+<button type="button" id="voice-apply" hidden></button>
+</details><div id="questions"></div><div class="toolbar"><button type="submit">Καταχώριση</button></div><p id="status" class="status" role="status"></p></form></section>
+<section class="card"><h2 id="overviewTitle" tabindex="-1">Προσωπική επισκόπηση</h2><p id="trend" role="status"></p><ul id="bars" class="bars" aria-label="Ημερήσια εξάντληση"></ul><div class="tablewrap"><table><caption>Τελευταίες 7 ημέρες</caption><thead><tr><th scope="col">Ημέρα</th><th scope="col">Εξάντληση</th><th scope="col">Ύπνος</th><th scope="col">Φόρτος</th></tr></thead><tbody id="history"></tbody></table></div></section>
+</div>
+<section class="card wearable" aria-labelledby="wearableTitle">
+<div class="wearable-head"><h2 id="wearableTitle" tabindex="-1">Φορετή συσκευή</h2><span id="wearable-state" class="wearable-state">Αποσυνδεδεμένη</span></div>
+<p class="muted">Προσομοίωση εισαγωγής δεδομένων από ρολόι. Όλες οι μετρήσεις είναι συνθετικές.</p>
+<div class="wearable-controls">
+<div><label for="wearable-source">Πηγή επίδειξης</label><select id="wearable-source"><option value="apple">Apple HealthKit</option><option value="android">Android Health Connect</option></select></div>
+<div><label for="wearable-scenario">Συνθήκη συγχρονισμού</label><select id="wearable-scenario"><option value="recent">Πρόσφατες μετρήσεις</option><option value="delayed">Καθυστέρηση συγχρονισμού</option></select></div>
+</div>
+<div class="toolbar"><button type="button" id="wearable-connect">Προσομοίωση σύνδεσης</button><button type="button" id="wearable-disconnect" class="secondary" hidden>Αποσύνδεση</button></div>
+<p id="wearable-status" class="status wearable-meta" role="status">Σύνδεσε μια προσομοιωμένη συσκευή για να δεις τις διαθέσιμες μετρήσεις.</p>
+<div id="wearable-data" hidden>
+<dl class="readings">
+<div><dt>Ύπνος τελευταίας νύχτας</dt><dd id="wearable-sleep"></dd></div>
+<div><dt>Καρδιακή συχνότητα ηρεμίας</dt><dd id="wearable-pulse"></dd></div>
+<div><dt id="wearable-hrv-label">HRV</dt><dd id="wearable-hrv"></dd></div>
+</dl>
+<p id="wearable-times" class="muted wearable-meta"></p>
+</div>
+<div id="wearable-prompt" class="panel" hidden><p>Η τελευταία συνθετική μέτρηση ύπνου είναι χαμηλότερη από τον προσωπικό μέσο όρο επίδειξης (7 ώρες και 15 λεπτά). Θέλεις να κάνεις ένα σύντομο check-in;</p><button type="button" class="secondary" id="wearable-checkin">Μετάβαση στο check-in</button></div>
+</section>
+<!-- guidance-start -->
+<section class="card support" aria-labelledby="guidance-title">
+<h2 id="guidance-title">Τι μπορώ να κάνω τώρα;</h2>
+<p>Διάλεξε τι σε απασχολεί. Η ΕυΒάρδια θα σου δείξει ένα βήμα για σήμερα και μία επιλογή για τις επόμενες ημέρες.</p>
+<form id="guidance-form">
+<label for="guidance-topic">Θέμα</label>
+<select id="guidance-topic">
+<option value="after_shift">Μετά τη βάρδια</option>
+<option value="before_shift">Πριν από την επόμενη βάρδια</option>
+<option value="recurring">Δυσκολία που επαναλαμβάνεται</option>
+</select>
+<button>Δες τις κατευθύνσεις</button>
+</form>
+<p role="status" id="guidance-status"></p>
+<div id="guidance-result" hidden>
+<h3>Για σήμερα</h3><p id="guidance-today"></p>
+<h3>Για τις επόμενες ημέρες</h3><p id="guidance-next"></p>
+</div>
+<a href="#supportTitle">Ανθρώπινη υποστήριξη</a>
+</section>
+<script src="/guidance.js" defer></script>
+<!-- guidance-end -->
+<section id="support" class="card support" aria-labelledby="supportTitle"><h2 id="supportTitle" tabindex="-1">Ανθρώπινη υποστήριξη</h2><p id="supportIntro">Δοκίμασε πώς θα εμφανίζεται η διαδρομή προς ανεξάρτητη υπηρεσία υποστήριξης ή προς άμεση βοήθεια.</p><div class="toolbar"><button type="button" data-route="regular">Επιλογές επικοινωνίας</button><button type="button" data-route="urgent" class="secondary">Χρειάζομαι άμεση βοήθεια</button></div><div id="route" class="panel" role="status" hidden></div></section>
+</main>
+<meta name="study-participant" content="__STUDY_PARTICIPANT__">
+<script src="/study.js"></script>
+<script>
+const questions = [
+  ['exhaustion','Πόσο εξαντλημένος νιώθεις;','Καθόλου','Πάρα πολύ'],
+  ['sleep','Πώς κοιμήθηκες;','Πολύ άσχημα','Πολύ καλά'],
+  ['load','Πόσο απαιτητική ήταν η βάρδια;','Καθόλου','Πάρα πολύ']
+];
+const byId = id => document.getElementById(id);
+const form = byId('checkin');
+const date = byId('date');
+const day = offset => {
+  const now = new Date();
+  now.setDate(now.getDate() - 6 + offset);
+  return new Intl.DateTimeFormat('sv-SE').format(now);
+};
+const dayLabel = value => value.slice(8) + '/' + value.slice(5,7);
+let entries = new Map();
+
+for (const [key, label, low, high] of questions) {
+  const field = document.createElement('fieldset');
+  const options = [1,2,3,4,5].map(value =>
+    '<label><input type="radio" name="' + key + '" value="' + value + '" required>' + value + '</label>'
+  ).join('');
+  field.innerHTML = '<legend>' + label + '</legend><div class="scale">' + options +
+    '</div><div class="ends"><span>1 · ' + low + '</span><span>5 · ' + high + '</span></div>';
+  byId('questions').append(field);
+}
+
+function render() {
+  const sorted = [...entries].sort(([a],[b]) => a.localeCompare(b));
+  const latest = sorted.at(-1)?.[1];
+  const summary = sorted.length < 3
+    ? 'Οι καταγραφές είναι λίγες για επισκόπηση της μεταβολής.'
+    : 'Η εξάντληση στην πρώτη καταγραφή ήταν ' + sorted[0][1][0] + '/5 και στην πιο πρόσφατη ' + latest[0] + '/5.';
+  byId('trend').textContent = summary + ' Καταγραφές: ' + sorted.length + ' από 7 ημέρες.';
+  byId('bars').innerHTML = sorted.map(([key, [score]]) =>
+    '<li><span>' + dayLabel(key) + '</span><meter min="0" max="5" value="' + score +
+    '" aria-label="Εξάντληση ' + dayLabel(key) + '"></meter><span>' + score + '/5</span></li>'
+  ).join('');
+  byId('history').innerHTML = Array.from({length:7}, (_, offset) => {
+    const key = day(offset);
+    const values = entries.get(key);
+    return '<tr><th scope="row">' + dayLabel(key) + '</th>' + (values
+      ? values.map(value => '<td>' + value + '/5</td>').join('')
+      : '<td colspan="3">Χωρίς καταγραφή</td>') + '</tr>';
+  }).reverse().join('');
+}
+
+function showRoute(kind) {
+  const route = byId('route');
+  route.hidden = false;
+  route.textContent = kind === 'urgent'
+    ? 'Προσομοίωση άμεσης υποστήριξης. Εδώ θα εμφανίζονται οι επιβεβαιωμένες επιλογές άμεσης επικοινωνίας του φορέα. Ο βοηθός επίδειξης δεν ειδοποιεί κανέναν.'
+    : 'Προσομοίωση επικοινωνίας. Εδώ θα εμφανίζονται τα στοιχεία και οι ώρες λειτουργίας της ανεξάρτητης υπηρεσίας υποστήριξης. Κανένα αίτημα δεν αποστέλλεται.';
+}
+
+date.addEventListener('change', () => {
+  const scores = entries.get(date.value);
+  questions.forEach(([name], index) => {
+    const group = form.elements.namedItem(name);
+    if (scores) group.value = String(scores[index]);
+    else Array.from(group).forEach(input => { input.checked = false; });
+  });
+  byId('status').textContent = scores ? 'Μπορείς να ενημερώσεις την υπάρχουσα καταγραφή.' : '';
+});
+
+date.min = day(0);
+date.max = day(6);
+
+
+byId('supportLink').addEventListener('click', () => {
+  recordStudyEvent('support_path_opened');
+  byId('supportTitle').focus();
+  byId('support').scrollIntoView({block:'nearest'});
+});
+document.querySelectorAll('[data-route]').forEach(button => {
+  button.addEventListener('click', () => showRoute(button.dataset.route));
+});
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const key = data.get('date');
+  const scores = questions.map(([field]) => Number(data.get(field)));
+  if (!Array.from({length:7}, (_, offset) => day(offset)).includes(key) ||
+      scores.some(score => !Number.isInteger(score) || score < 1 || score > 5)) return;
+  const replaced = entries.has(key);
+  entries.set(key, scores);
+  recordStudyEvent('checkin', {day:key});
+  render();
+  byId('status').textContent = replaced ? 'Η καταγραφή της ημέρας ενημερώθηκε.' : 'Η δοκιμαστική καταγραφή προστέθηκε.';
+});
+
+const wearableDemo = {
+  apple: {source:'Apple HealthKit', metric:'SDNN', hrv:44, pulse:63},
+  android: {source:'Android Health Connect', metric:'RMSSD', hrv:35, pulse:65}
+};
+const wearableSource = byId('wearable-source');
+const wearableScenario = byId('wearable-scenario');
+const wearableState = byId('wearable-state');
+const wearableStatus = byId('wearable-status');
+const wearableConnect = byId('wearable-connect');
+const wearableDisconnect = byId('wearable-disconnect');
+
+wearableConnect.addEventListener('click', () => {
+  const reading = wearableDemo[wearableSource.value];
+  const delayed = wearableScenario.value === 'delayed';
+  wearableState.dataset.state = delayed ? 'delayed' : 'recent';
+  wearableState.textContent = delayed ? 'Καθυστέρηση' : 'Συνδεδεμένη';
+  wearableConnect.textContent = 'Συγχρονισμός επίδειξης';
+  wearableDisconnect.hidden = false;
+  byId('wearable-data').hidden = false;
+  byId('wearable-prompt').hidden = delayed;
+  byId('wearable-sleep').textContent = delayed ? 'Μη διαθέσιμος' : '5 ώρες 50 λεπτά';
+  byId('wearable-pulse').textContent = (delayed ? reading.pulse + 2 : reading.pulse) + ' bpm';
+  byId('wearable-hrv-label').textContent = 'HRV · ' + reading.metric;
+  byId('wearable-hrv').textContent = (delayed ? reading.hrv - 2 : reading.hrv) + ' ms';
+  byId('wearable-times').textContent = delayed
+    ? 'Πηγή: ' + reading.source + ' · Παλαιότερη μέτρηση παλμών και HRV: 15/11/2026, 07:30.'
+    : 'Πηγή: ' + reading.source + ' · Τελευταία μέτρηση παλμών και HRV: 17/11/2026, 07:30 · Ύπνος: νύχτα 16–17/11.';
+  wearableStatus.textContent = delayed
+    ? 'Τελευταίος συγχρονισμός επίδειξης: 15/11/2026, 08:00. Εμφανίζονται παλαιότερες μετρήσεις.'
+    : 'Τελευταίος συγχρονισμός επίδειξης: 17/11/2026, 08:00.';
+});
+
+wearableDisconnect.addEventListener('click', () => {
+  delete wearableState.dataset.state;
+  wearableState.textContent = 'Αποσυνδεδεμένη';
+  wearableConnect.textContent = 'Προσομοίωση σύνδεσης';
+  wearableConnect.focus();
+  wearableDisconnect.hidden = true;
+  byId('wearable-data').hidden = true;
+  byId('wearable-prompt').hidden = true;
+  wearableStatus.textContent = 'Η συσκευή αποσυνδέθηκε. Μπορείς να συνεχίσεις με το χειροκίνητο check-in.';
+});
+
+byId('wearable-checkin').addEventListener('click', () => {
+  date.focus();
+  date.scrollIntoView({block:'center'});
+});
+
+date.value = day(6);
+render();
+
+const voicePanel = byId('voice-panel');
+const voiceQuestion = byId('voice-question');
+const voiceRead = byId('voice-read');
+const voiceListen = byId('voice-listen');
+const voiceCancel = byId('voice-cancel');
+const voiceStatus = byId('voice-status');
+const voiceApply = byId('voice-apply');
+const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const voiceLanguage = 'el-GR';
+const speech = window.speechSynthesis;
+let localAvailable = false;
+let activeRecognition = null;
+let pendingVoice = null;
+
+for (const [name, label] of questions) voiceQuestion.add(new Option(label, name));
+
+function voiceScore(transcript) {
+  const normalized = transcript.toLocaleLowerCase('el').normalize('NFD')
+    .replace(/\p{M}/gu, '').replace(/[.!;,·;]+$/u, '').trim();
+  const words = {ενα:1, ενας:1, μια:1, δυο:2, τρια:3, τρεις:3, τεσσερα:4, τεσσερις:4, πεντε:5};
+  return /^[1-5]$/.test(normalized) ? Number(normalized) : Object.hasOwn(words, normalized) ? words[normalized] : null;
+}
+
+function clearVoice() {
+  pendingVoice = null;
+  voiceApply.hidden = true;
+}
+
+function finishListening() {
+  activeRecognition = null;
+  voiceCancel.hidden = true;
+  voiceListen.disabled = !localAvailable;
+}
+
+function stopVoice() {
+  if (activeRecognition) {
+    const recognition = activeRecognition;
+    finishListening();
+    recognition.abort();
+    voiceStatus.textContent = 'Η ακρόαση διακόπηκε.';
+  }
+  speech?.cancel();
+  clearVoice();
+}
+
+async function checkLocalSpeech() {
+  try {
+    if (typeof Recognition?.available === 'function' && 'processLocally' in Recognition.prototype) {
+      localAvailable = await Recognition.available({langs:[voiceLanguage], processLocally:true}) === 'available';
+    }
+  } catch {
+    localAvailable = false;
+  }
+  voiceListen.disabled = !localAvailable;
+  voiceStatus.textContent = localAvailable
+    ? 'Το μικρόφωνο ενεργοποιείται όταν πατήσεις το κουμπί. Η αναγνώριση γίνεται στη συσκευή.'
+    : 'Η τοπική αναγνώριση ελληνικών δεν είναι διαθέσιμη σε αυτή τη συσκευή ή στον browser. Επίλεξε απάντηση από τη φόρμα.';
+}
+
+voiceRead.disabled = !speech || typeof window.SpeechSynthesisUtterance !== 'function';
+voiceRead.addEventListener('click', () => {
+  if (activeRecognition) stopVoice();
+  const greekVoice = speech.getVoices().find(voice => voice.localService && /^el(?:-|_|$)/i.test(voice.lang));
+  if (!greekVoice) {
+    voiceStatus.textContent = 'Δεν βρέθηκε εγκατεστημένη ελληνική φωνή για εκφώνηση. Η ερώτηση εμφανίζεται στη φόρμα.';
+    return;
+  }
+  const [, label, low, high] = questions.find(([name]) => name === voiceQuestion.value);
+  const utterance = new SpeechSynthesisUtterance(label + ' Από το ένα έως το πέντε. Ένα, ' + low + '. Πέντε, ' + high + '.');
+  utterance.lang = voiceLanguage;
+  utterance.voice = greekVoice;
+  speech.cancel();
+  speech.speak(utterance);
+});
+
+voiceListen.addEventListener('click', () => {
+  if (!localAvailable || activeRecognition) return;
+  speech?.cancel();
+  clearVoice();
+  const question = voiceQuestion.value;
+  const recognition = new Recognition();
+  recognition.processLocally = true;
+  recognition.lang = voiceLanguage;
+  recognition.maxAlternatives = 1;
+  activeRecognition = recognition;
+  voiceListen.disabled = true;
+  voiceCancel.hidden = false;
+  voiceStatus.textContent = 'Πες έναν αριθμό από το 1 έως το 5.';
+  let received = false;
+  recognition.onresult = event => {
+    if (activeRecognition !== recognition) return;
+    received = true;
+    const score = voiceScore(event.results[0][0].transcript);
+    if (score === null) {
+      voiceStatus.textContent = 'Δεν αναγνωρίστηκε αριθμός από το 1 έως το 5. Δοκίμασε ξανά ή επίλεξε τιμή στη φόρμα.';
+      return;
+    }
+    pendingVoice = {question, score};
+    voiceApply.textContent = 'Επιβεβαίωση ' + score + '/5';
+    voiceApply.hidden = false;
+    voiceStatus.textContent = 'Αναγνωρίστηκε ' + score + '/5. Επιβεβαίωσέ το ή επίλεξε άλλη τιμή στη φόρμα.';
+  };
+  recognition.onerror = () => {
+    if (activeRecognition !== recognition) return;
+    finishListening();
+    recordStudyEvent('technical_error', {error:'voice_recognition'});
+    voiceStatus.textContent = 'Η ακρόαση δεν ολοκληρώθηκε. Δοκίμασε ξανά ή επίλεξε τιμή στη φόρμα.';
+  };
+  recognition.onend = () => {
+    if (activeRecognition !== recognition) return;
+    finishListening();
+    if (!received) voiceStatus.textContent = 'Δεν ακούστηκε απάντηση. Μπορείς να δοκιμάσεις ξανά.';
+  };
+  try {
+    recognition.start();
+    recordStudyEvent('voice_attempted');
+  } catch {
+    finishListening();
+    recordStudyEvent('technical_error', {error:'voice_start'});
+    voiceStatus.textContent = 'Το μικρόφωνο δεν μπόρεσε να ξεκινήσει. Επίλεξε τιμή στη φόρμα.';
+  }
+});
+
+voiceApply.addEventListener('click', () => {
+  if (!pendingVoice) return;
+  const {question, score} = pendingVoice;
+  form.elements.namedItem(question).value = String(score);
+  recordStudyEvent('voice_confirmed');
+  clearVoice();
+  voiceStatus.textContent = 'Η τιμή ' + score + '/5 πέρασε στη φόρμα. Μπορείς να την αλλάξεις πριν την καταχώριση.';
+  const next = questions.find(([name]) => !form.elements.namedItem(name).value);
+  if (next) voiceQuestion.value = next[0];
+  (next && localAvailable ? voiceListen : voiceQuestion).focus();
+});
+
+voiceCancel.addEventListener('click', stopVoice);
+voiceQuestion.addEventListener('change', stopVoice);
+date.addEventListener('change', stopVoice);
+
+
+form.addEventListener('submit', stopVoice);
+byId('questions').addEventListener('change', stopVoice);
+voicePanel.addEventListener('toggle', () => { if (!voicePanel.open) stopVoice(); });
+checkLocalSpeech();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="el"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Πρόσβαση στην ΕυΒάρδια</title>
+<style>body{font:16px/1.5 system-ui;background:#f1f6f2;color:#173d32;margin:8vh auto;padding:20px;max-width:420px}input,button{font:inherit;padding:10px;margin:6px 0}input{width:90%}button{background:#146353;color:white;border:0;border-radius:8px}</style>
+<h1>ΕυΒάρδια</h1><p>Ερευνητικό πρωτότυπο για τοπική δοκιμή με συνθετικούς κωδικούς.</p>
+<form><label for="code">Ατομικός κωδικός πρόσβασης</label><br><input id="code" type="password" required><br><button>Είσοδος</button></form>
+<p role="status" id="message"></p>
+<script>
+document.querySelector('form').addEventListener('submit', async event => {
+  event.preventDefault();
+  const output = document.getElementById('message');
+  try {
+    const response = await fetch('/login', {method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({access_code:document.getElementById('code').value})});
+    if (response.ok) location.reload();
+    else output.textContent = 'Ο κωδικός πρόσβασης δεν έγινε δεκτός.';
+  } catch {
+    output.textContent = 'Δεν ήταν δυνατή η σύνδεση. Δοκίμασε ξανά.';
+  }
+});
+</script>
+</html>
