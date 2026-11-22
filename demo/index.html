@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ΕυΒάρδια · Υποστήριξη επαγγελματιών υγείας</title>
+<style>
+:root{color-scheme:light;--ink:#163b35;--muted:#4d665f;--line:#d4e2db;--paper:#f4f7f3;--accent:#165e50}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 "Inter",system-ui,sans-serif}header{background:#123b33;color:white}nav,main{width:min(1100px,calc(100% - 36px));margin:auto}nav{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:17px 0;font-weight:650}main{padding:42px 0}.intro{margin-bottom:25px}h1{font-size:clamp(30px,5vw,52px);line-height:1.1;max-width:750px;margin:0 0 13px;letter-spacing:-.04em}h2{font-size:22px;margin:0 0 10px}p{margin:0 0 13px}.muted,small{color:var(--muted)}.demo{padding:16px 20px;background:#e4eee6;border:1px solid var(--line);border-radius:15px;margin-bottom:20px}.demo label{display:block;margin-bottom:5px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:24px}.support{margin-top:20px;background:#eef4ee}label{font-weight:650}select,button,input{font:inherit}select,input[type=date]{width:100%;background:white;color:var(--ink);border:1px solid #91aaa0;border-radius:8px;padding:9px}fieldset{border:0;margin:17px 0;padding:0}legend{font-weight:650;margin-bottom:6px}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.scale label{display:grid;place-items:center;min-height:42px;border:1px solid #a0b6ad;border-radius:8px;cursor:pointer;position:relative}.scale label:has(:checked){background:#d6ece4;border-color:var(--accent)}.scale input{position:absolute;opacity:0}.scale label:has(:focus-visible){outline:3px solid #aa681a;outline-offset:2px}.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}button{border:1px solid var(--accent);border-radius:9px;background:var(--accent);color:white;padding:9px 15px;cursor:pointer;font-weight:650}header button{border-color:#accec1;background:transparent}button.secondary{background:white;color:var(--accent)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #aa681a;outline-offset:3px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}caption{text-align:left;font-weight:650;margin:12px 0 4px}th,td{padding:7px 4px;border-bottom:1px solid var(--line)}td:first-child{white-space:nowrap}.bars{list-style:none;padding:0;margin:16px 0}.bars li{display:grid;grid-template-columns:52px 1fr 40px;gap:8px;align-items:center;margin:7px 0;font-size:14px}meter{width:100%;height:18px;accent-color:var(--accent)}.status{min-height:1.5em;margin:9px 0 0}.panel{padding:15px;border:1px solid var(--line);background:white;border-radius:10px;margin-top:14px}.panel p:last-child{margin-bottom:0}@media(max-width:720px){.grid{grid-template-columns:1fr}main{padding-top:28px}.card{padding:18px}nav{font-size:14px}}
+
+.wearable{margin-top:20px}.wearable-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}.wearable-state{border:1px solid var(--line);border-radius:40px;padding:4px 12px;font-size:14px;font-weight:650;background:#eef4ee}.wearable-state[data-state=delayed]{background:#fff3da;color:#664b15}.wearable-controls{display:grid;grid-template-columns:minmax(150px,1fr) minmax(150px,1fr);gap:12px;max-width:640px;margin:12px 0}.readings{display:grid;grid-template-columns:repeat(3,1fr);margin:15px 0;gap:10px}.readings div{padding:12px;background:var(--paper);border-radius:9px}.readings dt{color:var(--muted);font-size:14px}.readings dd{margin:0;font-size:21px;font-weight:650}.wearable-meta{font-size:14px}@media(max-width:520px){.wearable-controls{grid-template-columns:1fr}.readings{grid-template-columns:1fr}}
+
+.brand{font-size:clamp(22px,4vw,30px);font-weight:750;letter-spacing:-.035em}.quick-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.quick-links a{color:var(--accent);background:white;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-weight:650}.quick-links a:focus-visible,[tabindex="-1"]:focus-visible{outline:3px solid #aa681a;outline-offset:3px}@media(max-width:420px){nav{gap:8px}header button{font-size:13px;padding:8px 9px}.tablewrap table{font-size:12px}}
+.voice-panel{margin:14px 0}.voice-panel summary{cursor:pointer;font-weight:650}.voice-panel select{margin:4px 0 10px}.voice-panel .toolbar button{margin-bottom:4px}button:disabled{opacity:.55;cursor:default}
+
+.guidance{margin-top:20px}.guidance-form{max-width:620px}.guidance-form select{margin:5px 0 10px}.guidance-results{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.guidance-results[hidden]{display:none}.guidance-results .panel{margin-top:0}.guidance-results h3{font-size:17px;margin:0 0 5px}.guidance a,.checkin-guidance{color:var(--accent);font-weight:650}@media(max-width:520px){.guidance-results{grid-template-columns:1fr}}
+
+.support-demos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.support-demos .panel{margin:0}.support-demos h3{font-size:18px;margin:0 0 8px}.support-demos select{margin:5px 0 10px}.support-demo-output{margin-top:10px}.support-demo-output p{margin:0 0 8px}@media(max-width:620px){.support-demos{grid-template-columns:1fr}}
+
+.avatar-shell{margin:0 0 24px}.avatar-toggle{margin-bottom:10px}.avatar-layout{display:grid;grid-template-columns:112px 1fr;gap:24px;align-items:start}.avatar-figure{width:108px;height:125px;position:relative;display:grid;place-items:center;background:#e4f1eb;border-radius:32px}.avatar-head{width:78px;height:68px;border:3px solid #165e50;border-radius:25px;background:white;position:relative;box-shadow:0 5px 0 #c2ddd1}.avatar-eyes{position:absolute;top:20px;left:18px;width:10px;height:12px;border-radius:50%;background:#165e50;box-shadow:27px 0 #165e50}.avatar-mouth{position:absolute;left:27px;top:43px;width:19px;height:7px;border-bottom:3px solid #165e50;border-radius:0 0 12px 12px}.avatar-head:before{content:'';position:absolute;top:-16px;left:33px;width:6px;height:13px;background:#165e50;border-radius:4px}.avatar-speaking .avatar-mouth{animation:avatar-talk .45s ease-in-out infinite}.avatar-label{font-size:14px;font-weight:650;margin:0 0 4px}.avatar-text{font-size:17px;max-width:730px}.avatar-actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.avatar-meta{font-size:14px}.avatar-layout h2{margin-top:0}.avatar-shell [hidden]{display:none!important}@keyframes avatar-talk{50%{height:12px;top:40px;border:3px solid #165e50;border-radius:10px}}@media(prefers-reduced-motion:reduce){.avatar-speaking .avatar-mouth{animation:none}}@media(max-width:600px){.avatar-layout{grid-template-columns:1fr;gap:14px}.avatar-figure{width:82px;height:94px}.avatar-head{transform:scale(.8)}.avatar-actions button{width:100%;text-align:left}}
+
+</style>
+</head>
+<body>
+<header><nav><span class="brand">ΕυΒάρδια</span><button id="supportLink" type="button">Θέλω να μιλήσω με κάποιον</button></nav></header>
+<main>
+<div class="intro"><h1>Πώς πήγε η βάρδια σου;</h1><p class="muted">Ένα σύντομο check-in για την εργασιακή εξάντληση, τον ύπνο και τον φόρτο της βάρδιας.</p><div class="quick-links"><a href="#checkinTitle">Κάνε check-in</a><a href="#overviewTitle">Δες την επισκόπηση</a><a href="#wearableTitle">Δοκίμασε το ρολόι</a><a href="#guidance-title">Δες τις κατευθύνσεις</a><a href="#qol-title">Ευεξία και λειτουργικότητα</a></div></div>
+
+<section class="avatar-shell" aria-labelledby="avatar-title">
+<button type="button" class="secondary avatar-toggle" id="avatar-toggle" aria-expanded="true" aria-controls="avatar-panel">Απόκρυψη βοηθού</button>
+<div id="avatar-panel" class="card avatar-layout">
+<div class="avatar-figure" id="avatar-figure" aria-hidden="true"><div class="avatar-head"><span class="avatar-eyes"></span><span class="avatar-mouth"></span></div></div>
+<div><p class="avatar-label">Avatar ΕυΒάρδια · Ψηφιακός βοηθός</p><h2 id="avatar-title">Ας βρούμε το επόμενο βήμα</h2>
+<p id="avatar-message" class="avatar-text" aria-live="polite" aria-atomic="true">Καλώς ήρθες στο ΕυΒάρδια. Μπορώ να σε καθοδηγήσω στις λειτουργίες της επίδειξης. Επίλεξε τι θέλεις να δοκιμάσεις.</p>
+<p class="muted avatar-meta">Δεν είμαι επαγγελματίας υγείας. Η επίδειξη χρησιμοποιεί συνθετικά δεδομένα και προκαθορισμένες οδηγίες. Δεν παρέχει διάγνωση ή επείγουσα παρακολούθηση.</p>
+<div class="avatar-actions" aria-label="Καθοδήγηση ψηφιακού βοηθού">
+<button type="button" data-avatar-topic="checkin">Καθημερινό check-in</button>
+<button type="button" data-avatar-topic="wellbeing" class="secondary">Ευεξία και λειτουργικότητα</button>
+<button type="button" data-avatar-topic="guidance" class="secondary">Συμβουλές υποστήριξης</button>
+<button type="button" data-avatar-topic="support" class="secondary">Ανθρώπινη υποστήριξη</button></div>
+<div class="toolbar"><button type="button" class="secondary" id="avatar-speak" disabled>Άκουσε την οδηγία</button><button type="button" class="secondary" id="avatar-stop" disabled>Διακοπή φωνής</button><button type="button" class="secondary" id="avatar-mute" aria-pressed="false">Σίγαση φωνής</button><button type="button" class="secondary" id="avatar-go" hidden>Μετάβαση στην ενότητα</button></div>
+<p id="avatar-status" class="muted avatar-meta" role="status">Η εκφώνηση ξεκινά μόνο όταν την επιλέξεις. Οι γραπτές οδηγίες είναι πάντα διαθέσιμες.</p>
+</div></div></section>
+
+<div class="demo"><label for="scenario">Πρωτότυπο · Σενάριο επίδειξης</label><select id="scenario"><option value="rising">Αυξανόμενη εξάντληση μετά από διαδοχικές βάρδιες</option><option value="sparse">Αραιές καταγραφές</option><option value="help">Αίτημα άμεσης ανθρώπινης υποστήριξης</option></select><small>Επίδειξη με συνθετικά δεδομένα. Οι δοκιμαστικές καταγραφές διαγράφονται με την ανανέωση της σελίδας.</small></div>
+<div class="grid">
+<section class="card"><h2 id="checkinTitle" tabindex="-1">Σύντομο check-in</h2><form id="checkin"><label for="date">Ημερομηνία δοκιμής</label><input id="date" name="date" type="date" required><details class="panel voice-panel" id="voice-panel">
+<summary>Φωνητικό check-in</summary>
+<p class="muted">Διάλεξε ερώτηση και πες έναν αριθμό από το 1 έως το 5. Επιβεβαίωσε την τιμή πριν περάσει στη φόρμα.</p>
+<label for="voice-question">Ερώτηση</label><select id="voice-question"></select>
+<div class="toolbar"><button type="button" class="secondary" id="voice-read">Εκφώνηση</button><button type="button" id="voice-listen" disabled>Πάτησε και μίλησε</button><button type="button" class="secondary" id="voice-cancel" hidden>Ακύρωση ακρόασης</button></div>
+<p id="voice-status" role="status">Έλεγχος τοπικής αναγνώρισης ελληνικών…</p>
+<button type="button" id="voice-apply" hidden></button>
+</details><div id="questions"></div><div class="toolbar"><button type="submit">Καταχώριση</button><button type="button" id="resetScenario" class="secondary">Επαναφορά σεναρίου</button></div><p id="status" class="status" role="status"></p><a class="checkin-guidance" id="checkin-guidance" href="#guidance-title" hidden>Τι μπορώ να κάνω τώρα;</a></form></section>
+<section class="card"><h2 id="overviewTitle" tabindex="-1">Προσωπική επισκόπηση</h2><p id="trend" role="status"></p><ul id="bars" class="bars" aria-label="Ημερήσια εξάντληση"></ul><div class="tablewrap"><table><caption>Τελευταίες 7 ημέρες επίδειξης</caption><thead><tr><th scope="col">Ημέρα</th><th scope="col">Εξάντληση</th><th scope="col">Ύπνος</th><th scope="col">Φόρτος</th></tr></thead><tbody id="history"></tbody></table></div></section>
+</div>
+<section class="card wearable" aria-labelledby="wearableTitle">
+<div class="wearable-head"><h2 id="wearableTitle" tabindex="-1">Φορετή συσκευή</h2><span id="wearable-state" class="wearable-state">Αποσυνδεδεμένη</span></div>
+<p class="muted">Προσομοίωση εισαγωγής δεδομένων από ρολόι. Όλες οι μετρήσεις είναι συνθετικές.</p>
+<div class="wearable-controls">
+<div><label for="wearable-source">Πηγή επίδειξης</label><select id="wearable-source"><option value="apple">Apple HealthKit</option><option value="android">Android Health Connect</option></select></div>
+<div><label for="wearable-scenario">Συνθήκη συγχρονισμού</label><select id="wearable-scenario"><option value="recent">Πρόσφατες μετρήσεις</option><option value="delayed">Καθυστέρηση συγχρονισμού</option></select></div>
+</div>
+<div class="toolbar"><button type="button" id="wearable-connect">Προσομοίωση σύνδεσης</button><button type="button" id="wearable-disconnect" class="secondary" hidden>Αποσύνδεση</button></div>
+<p id="wearable-status" class="status wearable-meta" role="status">Σύνδεσε μια προσομοιωμένη συσκευή για να δεις τις διαθέσιμες μετρήσεις.</p>
+<div id="wearable-data" hidden>
+<dl class="readings">
+<div><dt>Ύπνος τελευταίας νύχτας</dt><dd id="wearable-sleep"></dd></div>
+<div><dt>Καρδιακή συχνότητα ηρεμίας</dt><dd id="wearable-pulse"></dd></div>
+<div><dt id="wearable-hrv-label">HRV</dt><dd id="wearable-hrv"></dd></div>
+</dl>
+<p id="wearable-times" class="muted wearable-meta"></p>
+</div>
+<div id="wearable-prompt" class="panel" hidden><p>Η τελευταία συνθετική μέτρηση ύπνου είναι χαμηλότερη από τον προσωπικό μέσο όρο επίδειξης (7 ώρες και 15 λεπτά). Θέλεις να κάνεις ένα σύντομο check-in;</p><button type="button" class="secondary" id="wearable-checkin">Μετάβαση στο check-in</button></div>
+</section>
+<section class="card guidance" aria-labelledby="guidance-title">
+<h2 id="guidance-title" tabindex="-1">Τι μπορώ να κάνω τώρα;</h2>
+<p class="muted">Επίδειξη με ενδεικτικές κάρτες γενικής υποστήριξης. Διάλεξε τι σε απασχολεί.</p>
+<form class="guidance-form" id="guidance-form">
+<label for="guidance-topic">Θέμα</label>
+<select id="guidance-topic">
+<option value="after_shift">Μετά τη βάρδια</option>
+<option value="before_shift">Πριν από την επόμενη βάρδια</option>
+<option value="recurring">Δυσκολία που επαναλαμβάνεται</option>
+</select>
+<button type="submit">Δες τις κατευθύνσεις</button>
+</form>
+<p id="guidance-status" class="status" role="status"></p>
+<div class="guidance-results" id="guidance-result" hidden>
+<div class="panel"><h3>Για σήμερα</h3><p id="guidance-today"></p></div>
+<div class="panel"><h3>Για τις επόμενες ημέρες</h3><p id="guidance-next"></p></div>
+</div>
+<a href="#supportTitle">Δες τη διαδρομή ανθρώπινης υποστήριξης</a>
+</section>
+<section id="support" class="card support" aria-labelledby="supportTitle"><h2 id="supportTitle" tabindex="-1">Ανθρώπινη υποστήριξη</h2><p id="supportIntro">Δοκίμασε πώς θα εμφανίζεται η διαδρομή προς ανεξάρτητη υπηρεσία υποστήριξης ή προς άμεση βοήθεια.</p><div class="toolbar"><button type="button" data-route="regular">Επιλογές επικοινωνίας</button><button type="button" data-route="urgent" class="secondary">Χρειάζομαι άμεση βοήθεια</button></div><div id="route" class="panel" role="status" hidden></div>
+<p style="margin-top:14px"><strong>Διαδικτυακή υποστήριξη · Επίδειξη</strong><br><span class="muted">Τα προφίλ και οι χρόνοι είναι συνθετικοί. Οι ενέργειες εκτελούνται μόνο μέσα στην επίδειξη.</span></p>
+<div class="support-demos">
+<article class="panel"><h3>Διαθέσιμος ειδικός τώρα</h3>
+<p><strong>Ειδικός Α</strong> · Ψυχολόγος της υπηρεσίας υποστήριξης του οργανισμού<br><small>Συνθετικό προφίλ · Προσομοίωση επαληθευμένης ιδιότητας</small></p>
+<button type="button" id="support-demo-start">Έναρξη δοκιμαστικής συνομιλίας</button>
+<div class="support-demo-output" id="support-demo-chat" hidden>
+<p role="status"><strong>Δοκιμαστική σύνδεση ολοκληρώθηκε.</strong></p>
+<p>Ειδικός Α (σενάριο): «Καλώς ήρθες. Μπορούμε να ξεκινήσουμε από αυτό που σε δυσκολεύει στη βάρδια.»</p>
+<p class="muted">Οι απαντήσεις του check-in δεν κοινοποιούνται.</p>
+<button type="button" class="secondary" id="support-demo-end">Λήξη δοκιμαστικής συνομιλίας</button>
+</div>
+<p class="status" id="support-demo-chat-status" role="status"></p>
+</article>
+<article class="panel"><h3>Ζήτησε ραντεβού</h3>
+<p><strong>Ειδικός Β</strong> · Ψυχολόγος της υπηρεσίας υποστήριξης του οργανισμού<br><small>Συνθετικό προφίλ · Προσομοίωση επαληθευμένης ιδιότητας</small></p>
+<form id="support-demo-book">
+<label for="support-demo-slot">Ενδεικτική ώρα</label>
+<select id="support-demo-slot" required>
+<option value="">Επίλεξε ώρα</option>
+<option>Αύριο, 11:00</option>
+<option>Αύριο, 15:30</option>
+<option>Μεθαύριο, 10:30</option>
+</select>
+<button type="submit">Υποβολή δοκιμαστικού αιτήματος</button>
+</form>
+<p class="status" id="support-demo-book-status" role="status"></p>
+</article>
+</div></section>
+
+<section class="card" id="qol" aria-labelledby="qol-title" style="margin-top:20px">
+<h2 id="qol-title" tabindex="-1">Ευεξία και καθημερινή λειτουργικότητα</h2>
+<p><strong>Ερευνητική επίδειξη · Συνθετικά δεδομένα · Μη επικυρωμένη σύνθεση</strong></p>
+<p class="muted">Δοκίμασε πώς συνδυάζονται προσωπικές μεταβολές από ρολόι με ένα σύντομο check-in. Δεν υπολογίζεται βαθμολογία ποιότητας ζωής ή κίνδυνος κρίσης.</p>
+<label for="qol-profile">Συνθετικό προφίλ</label>
+<select id="qol-profile"><option value="stable">Σταθερή καθημερινότητα</option><option value="strain">Μεταβολές μετά από βάρδιες</option><option value="discordant">Ασυμφωνία αισθητήρων και αυτοαναφοράς</option><option value="missing">Ανεπαρκείς καταγραφές ρολογιού</option></select>
+<div class="grid" style="margin-top:18px"><div><h3>Προσωπικές μεταβολές wearable</h3><p class="muted">Συνθετικός μέσος όρος 7 ημερών έναντι προηγούμενης περιόδου 14 ημερών. Το προφίλ αυτό είναι ανεξάρτητο από τον προσομοιωτή συσκευής παραπάνω.</p><div id="qol-sensors"></div></div>
+<form id="qol-form"><h3>Σύντομο check-in επίδειξης</h3><p class="muted">Δεν αποτελεί σταθμισμένο ερωτηματολόγιο. Κλίμακα 1–5.</p>
+<label for="qol-fatigue">Κόπωση · 1 καθόλου, 5 πολύ</label><select id="qol-fatigue" required><option value="">Επίλεξε</option></select>
+<label for="qol-mood">Διάθεση · 1 πολύ χαμηλή, 5 πολύ καλή</label><select id="qol-mood" required><option value="">Επίλεξε</option></select>
+<label for="qol-function">Καθημερινή λειτουργικότητα · 1 πολύ περιορισμένη, 5 πλήρης</label><select id="qol-function" required><option value="">Επίλεξε</option></select>
+<button style="margin-top:14px" type="submit">Σύνθεση πληροφοριών επίδειξης</button></form></div>
+<div id="qol-result" class="panel" role="status" hidden></div>
+<details class="panel"><summary>Πώς λειτουργεί και πώς θα επικυρωθεί</summary><p>Η επίδειξη χρησιμοποιεί προκαθορισμένους ασαφείς κανόνες: οι σχετικές μεταβολές ύπνου και δραστηριότητας και η αλλαγή παλμών μετατρέπονται σε βαθμούς συμμετοχής 0–1. Η αυτοαναφορά συνδυάζεται με ίσο βάρος. Τα βάρη και τα όρια είναι ενδεικτικά και δεν έχουν εκπαιδευτεί σε ανθρώπους. HRV δεν συνδυάζεται εδώ, επειδή SDNN και RMSSD δεν είναι εναλλάξιμα.</p><p>Οι κανόνες δεν εξηγούν την αιτία μιας μεταβολής. Όταν οι πηγές διαφωνούν ή λείπουν επαρκείς μετρήσεις, ζητείται επιβεβαίωση αντί για συνολική εκτίμηση.</p><p>Στη μελέτη, θα αντιστοιχηθούν χρονικά παράθυρα δεδομένων με βαθμολογίες κατάλληλου επικυρωμένου ελληνικού ερωτηματολογίου. Θα συγκριθούν μοντέλα wearable, αυτοαναφοράς και σύντηξης. Η βαθμολογία-στόχος θα παραμένει χωριστή από τις εισόδους και η αξιολόγηση θα διαχωρίζει συμμετέχοντες και χρόνο.</p><p>Επικυρωμένο μοντέλο ποιότητας ζωής: <strong>ανενεργό — δεν υπάρχει εκπαιδευμένο μοντέλο</strong>.</p></details>
+<div class="toolbar" style="margin-top:14px"><button id="qol-export" type="button" class="secondary" disabled>Εξαγωγή συνθετικής εγγραφής CSV</button><button id="qol-reset" type="button" class="secondary">Καθαρισμός check-in</button></div>
+<p id="qol-export-status" class="muted" role="status">Καμία αποστολή ή αποθήκευση δεδομένων αυτής της ενότητας. Η εξαγωγή γίνεται μόνο στη συσκευή σου.</p>
+<p><a href="#supportTitle">Ανθρώπινη υποστήριξη</a></p>
+</section>
+
+</main>
+<script>
+const questions = [
+  ['exhaustion','Πόσο εξαντλημένος νιώθεις;','Καθόλου','Πάρα πολύ'],
+  ['sleep','Πώς κοιμήθηκες;','Πολύ άσχημα','Πολύ καλά'],
+  ['load','Πόσο απαιτητική ήταν η βάρδια;','Καθόλου','Πάρα πολύ']
+];
+const scenarios = {
+  rising: [[0,2,4,2],[1,2,4,3],[2,3,3,4],[3,4,2,4],[4,4,2,5],[5,5,1,5]],
+  sparse: [[1,2,4,3],[5,4,2,4]],
+  help: [[2,3,3,4],[3,4,2,4],[5,5,2,5]]
+};
+const byId = id => document.getElementById(id);
+const form = byId('checkin');
+const scenario = byId('scenario');
+const date = byId('date');
+const day = offset => '2026-11-' + String(11 + offset);
+const dayLabel = value => value.slice(8) + '/11';
+let entries = new Map();
+
+for (const [key, label, low, high] of questions) {
+  const field = document.createElement('fieldset');
+  const options = [1,2,3,4,5].map(value =>
+    '<label><input type="radio" name="' + key + '" value="' + value + '" required>' + value + '</label>'
+  ).join('');
+  field.innerHTML = '<legend>' + label + '</legend><div class="scale">' + options +
+    '</div><div class="ends"><span>1 · ' + low + '</span><span>5 · ' + high + '</span></div>';
+  byId('questions').append(field);
+}
+
+function render() {
+  const sorted = [...entries].sort(([a],[b]) => a.localeCompare(b));
+  const latest = sorted.at(-1)?.[1];
+  const summary = sorted.length < 3
+    ? 'Οι καταγραφές είναι λίγες για επισκόπηση της μεταβολής.'
+    : 'Η εξάντληση στην πρώτη καταγραφή ήταν ' + sorted[0][1][0] + '/5 και στην πιο πρόσφατη ' + latest[0] + '/5.';
+  byId('trend').textContent = summary + ' Καταγραφές: ' + sorted.length + ' από 7 ημέρες.';
+  byId('bars').innerHTML = sorted.map(([key, [score]]) =>
+    '<li><span>' + dayLabel(key) + '</span><meter min="0" max="5" value="' + score +
+    '" aria-label="Εξάντληση ' + dayLabel(key) + '"></meter><span>' + score + '/5</span></li>'
+  ).join('');
+  byId('history').innerHTML = Array.from({length:7}, (_, offset) => {
+    const key = day(offset);
+    const values = entries.get(key);
+    return '<tr><th scope="row">' + dayLabel(key) + '</th>' + (values
+      ? values.map(value => '<td>' + value + '/5</td>').join('')
+      : '<td colspan="3">Χωρίς καταγραφή</td>') + '</tr>';
+  }).reverse().join('');
+}
+
+function showRoute(kind) {
+  const route = byId('route');
+  route.hidden = false;
+  route.textContent = kind === 'urgent'
+    ? 'Προσομοίωση άμεσης υποστήριξης. Εδώ θα εμφανίζονται οι επιβεβαιωμένες επιλογές άμεσης επικοινωνίας του φορέα. Ο βοηθός επίδειξης δεν ειδοποιεί κανέναν.'
+    : 'Προσομοίωση επικοινωνίας. Εδώ θα εμφανίζονται τα στοιχεία και οι ώρες λειτουργίας της ανεξάρτητης υπηρεσίας υποστήριξης. Κανένα αίτημα δεν αποστέλλεται.';
+}
+
+function resetScenario() {
+  entries = new Map(scenarios[scenario.value].map(([offset,...scores]) => [day(offset),scores]));
+  form.reset();
+  date.value = day(6);
+  byId('status').textContent = '';
+  byId('checkin-guidance').hidden = true;
+  byId('route').hidden = true;
+  if (scenario.value === 'help') showRoute('urgent');
+  render();
+}
+
+date.addEventListener('change', () => {
+  const scores = entries.get(date.value);
+  questions.forEach(([name], index) => {
+    const group = form.elements.namedItem(name);
+    if (scores) group.value = String(scores[index]);
+    else Array.from(group).forEach(input => { input.checked = false; });
+  });
+  byId('status').textContent = scores ? 'Μπορείς να ενημερώσεις την υπάρχουσα καταγραφή.' : '';
+});
+
+date.min = day(0);
+date.max = day(6);
+scenario.addEventListener('change', resetScenario);
+byId('resetScenario').addEventListener('click', resetScenario);
+byId('supportLink').addEventListener('click', () => {
+  byId('supportTitle').focus();
+  byId('support').scrollIntoView({block:'nearest'});
+});
+document.querySelectorAll('[data-route]').forEach(button => {
+  button.addEventListener('click', () => showRoute(button.dataset.route));
+});
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const key = data.get('date');
+  const scores = questions.map(([field]) => Number(data.get(field)));
+  if (!Array.from({length:7}, (_, offset) => day(offset)).includes(key) ||
+      scores.some(score => !Number.isInteger(score) || score < 1 || score > 5)) return;
+  const replaced = entries.has(key);
+  entries.set(key, scores);
+  byId('checkin-guidance').hidden = false;
+  render();
+  byId('status').textContent = replaced ? 'Η καταγραφή της ημέρας ενημερώθηκε.' : 'Η δοκιμαστική καταγραφή προστέθηκε.';
+});
+
+const wearableDemo = {
+  apple: {source:'Apple HealthKit', metric:'SDNN', hrv:44, pulse:63},
+  android: {source:'Android Health Connect', metric:'RMSSD', hrv:35, pulse:65}
+};
+const wearableSource = byId('wearable-source');
+const wearableScenario = byId('wearable-scenario');
+const wearableState = byId('wearable-state');
+const wearableStatus = byId('wearable-status');
+const wearableConnect = byId('wearable-connect');
+const wearableDisconnect = byId('wearable-disconnect');
+
+wearableConnect.addEventListener('click', () => {
+  const reading = wearableDemo[wearableSource.value];
+  const delayed = wearableScenario.value === 'delayed';
+  wearableState.dataset.state = delayed ? 'delayed' : 'recent';
+  wearableState.textContent = delayed ? 'Καθυστέρηση' : 'Συνδεδεμένη';
+  wearableConnect.textContent = 'Συγχρονισμός επίδειξης';
+  wearableDisconnect.hidden = false;
+  byId('wearable-data').hidden = false;
+  byId('wearable-prompt').hidden = delayed;
+  byId('wearable-sleep').textContent = delayed ? 'Μη διαθέσιμος' : '5 ώρες 50 λεπτά';
+  byId('wearable-pulse').textContent = (delayed ? reading.pulse + 2 : reading.pulse) + ' bpm';
+  byId('wearable-hrv-label').textContent = 'HRV · ' + reading.metric;
+  byId('wearable-hrv').textContent = (delayed ? reading.hrv - 2 : reading.hrv) + ' ms';
+  byId('wearable-times').textContent = delayed
+    ? 'Πηγή: ' + reading.source + ' · Παλαιότερη μέτρηση παλμών και HRV: 15/11/2026, 07:30.'
+    : 'Πηγή: ' + reading.source + ' · Τελευταία μέτρηση παλμών και HRV: 17/11/2026, 07:30 · Ύπνος: νύχτα 16–17/11.';
+  wearableStatus.textContent = delayed
+    ? 'Τελευταίος συγχρονισμός επίδειξης: 15/11/2026, 08:00. Εμφανίζονται παλαιότερες μετρήσεις.'
+    : 'Τελευταίος συγχρονισμός επίδειξης: 17/11/2026, 08:00.';
+});
+
+wearableDisconnect.addEventListener('click', () => {
+  delete wearableState.dataset.state;
+  wearableState.textContent = 'Αποσυνδεδεμένη';
+  wearableConnect.textContent = 'Προσομοίωση σύνδεσης';
+  wearableConnect.focus();
+  wearableDisconnect.hidden = true;
+  byId('wearable-data').hidden = true;
+  byId('wearable-prompt').hidden = true;
+  wearableStatus.textContent = 'Η συσκευή αποσυνδέθηκε. Μπορείς να συνεχίσεις με το χειροκίνητο check-in.';
+});
+
+byId('wearable-checkin').addEventListener('click', () => {
+  date.focus();
+  date.scrollIntoView({block:'center'});
+});
+
+resetScenario();
+
+const voicePanel = byId('voice-panel');
+const voiceQuestion = byId('voice-question');
+const voiceRead = byId('voice-read');
+const voiceListen = byId('voice-listen');
+const voiceCancel = byId('voice-cancel');
+const voiceStatus = byId('voice-status');
+const voiceApply = byId('voice-apply');
+const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const voiceLanguage = 'el-GR';
+const speech = window.speechSynthesis;
+let localAvailable = false;
+let activeRecognition = null;
+let pendingVoice = null;
+
+for (const [name, label] of questions) voiceQuestion.add(new Option(label, name));
+
+function voiceScore(transcript) {
+  const normalized = transcript.toLocaleLowerCase('el').normalize('NFD')
+    .replace(/\p{M}/gu, '').replace(/[.!;,·;]+$/u, '').trim();
+  const words = {ενα:1, ενας:1, μια:1, δυο:2, τρια:3, τρεις:3, τεσσερα:4, τεσσερις:4, πεντε:5};
+  return /^[1-5]$/.test(normalized) ? Number(normalized) : Object.hasOwn(words, normalized) ? words[normalized] : null;
+}
+
+function clearVoice() {
+  pendingVoice = null;
+  voiceApply.hidden = true;
+}
+
+function finishListening() {
+  activeRecognition = null;
+  voiceCancel.hidden = true;
+  voiceListen.disabled = !localAvailable;
+}
+
+function stopVoice() {
+  if (activeRecognition) {
+    const recognition = activeRecognition;
+    finishListening();
+    recognition.abort();
+    voiceStatus.textContent = 'Η ακρόαση διακόπηκε.';
+  }
+  speech?.cancel();
+  clearVoice();
+}
+
+async function checkLocalSpeech() {
+  try {
+    if (typeof Recognition?.available === 'function' && 'processLocally' in Recognition.prototype) {
+      localAvailable = await Recognition.available({langs:[voiceLanguage], processLocally:true}) === 'available';
+    }
+  } catch {
+    localAvailable = false;
+  }
+  voiceListen.disabled = !localAvailable;
+  voiceStatus.textContent = localAvailable
+    ? 'Το μικρόφωνο ενεργοποιείται όταν πατήσεις το κουμπί. Η αναγνώριση γίνεται στη συσκευή.'
+    : 'Η τοπική αναγνώριση ελληνικών δεν είναι διαθέσιμη σε αυτή τη συσκευή ή στον browser. Επίλεξε απάντηση από τη φόρμα.';
+}
+
+voiceRead.disabled = !speech || typeof window.SpeechSynthesisUtterance !== 'function';
+voiceRead.addEventListener('click', () => {
+  if (activeRecognition) stopVoice();
+  const greekVoice = speech.getVoices().find(voice => voice.localService && /^el(?:-|_|$)/i.test(voice.lang));
+  if (!greekVoice) {
+    voiceStatus.textContent = 'Δεν βρέθηκε εγκατεστημένη ελληνική φωνή για εκφώνηση. Η ερώτηση εμφανίζεται στη φόρμα.';
+    return;
+  }
+  const [, label, low, high] = questions.find(([name]) => name === voiceQuestion.value);
+  const utterance = new SpeechSynthesisUtterance(label + ' Από το ένα έως το πέντε. Ένα, ' + low + '. Πέντε, ' + high + '.');
+  utterance.lang = voiceLanguage;
+  utterance.voice = greekVoice;
+  speech.cancel();
+  speech.speak(utterance);
+});
+
+voiceListen.addEventListener('click', () => {
+  if (!localAvailable || activeRecognition) return;
+  speech?.cancel();
+  clearVoice();
+  const question = voiceQuestion.value;
+  const recognition = new Recognition();
+  recognition.processLocally = true;
+  recognition.lang = voiceLanguage;
+  recognition.maxAlternatives = 1;
+  activeRecognition = recognition;
+  voiceListen.disabled = true;
+  voiceCancel.hidden = false;
+  voiceStatus.textContent = 'Πες έναν αριθμό από το 1 έως το 5.';
+  let received = false;
+  recognition.onresult = event => {
+    if (activeRecognition !== recognition) return;
+    received = true;
+    const score = voiceScore(event.results[0][0].transcript);
+    if (score === null) {
+      voiceStatus.textContent = 'Δεν αναγνωρίστηκε αριθμός από το 1 έως το 5. Δοκίμασε ξανά ή επίλεξε τιμή στη φόρμα.';
+      return;
+    }
+    pendingVoice = {question, score};
+    voiceApply.textContent = 'Επιβεβαίωση ' + score + '/5';
+    voiceApply.hidden = false;
+    voiceStatus.textContent = 'Αναγνωρίστηκε ' + score + '/5. Επιβεβαίωσέ το ή επίλεξε άλλη τιμή στη φόρμα.';
+  };
+  recognition.onerror = () => {
+    if (activeRecognition !== recognition) return;
+    finishListening();
+    voiceStatus.textContent = 'Η ακρόαση δεν ολοκληρώθηκε. Δοκίμασε ξανά ή επίλεξε τιμή στη φόρμα.';
+  };
+  recognition.onend = () => {
+    if (activeRecognition !== recognition) return;
+    finishListening();
+    if (!received) voiceStatus.textContent = 'Δεν ακούστηκε απάντηση. Μπορείς να δοκιμάσεις ξανά.';
+  };
+  try {
+    recognition.start();
+  } catch {
+    finishListening();
+    voiceStatus.textContent = 'Το μικρόφωνο δεν μπόρεσε να ξεκινήσει. Επίλεξε τιμή στη φόρμα.';
+  }
+});
+
+voiceApply.addEventListener('click', () => {
+  if (!pendingVoice) return;
+  const {question, score} = pendingVoice;
+  form.elements.namedItem(question).value = String(score);
+  clearVoice();
+  voiceStatus.textContent = 'Η τιμή ' + score + '/5 πέρασε στη φόρμα. Μπορείς να την αλλάξεις πριν την καταχώριση.';
+  const next = questions.find(([name]) => !form.elements.namedItem(name).value);
+  if (next) voiceQuestion.value = next[0];
+  (next && localAvailable ? voiceListen : voiceQuestion).focus();
+});
+
+voiceCancel.addEventListener('click', stopVoice);
+voiceQuestion.addEventListener('change', stopVoice);
+date.addEventListener('change', stopVoice);
+scenario.addEventListener('change', stopVoice);
+byId('resetScenario').addEventListener('click', stopVoice);
+form.addEventListener('submit', stopVoice);
+byId('questions').addEventListener('change', stopVoice);
+voicePanel.addEventListener('toggle', () => { if (!voicePanel.open) stopVoice(); });
+checkLocalSpeech();
+
+const guidanceCards = {
+  after_shift: {
+    today: 'Όταν τελειώσει η βάρδια, διάλεξε μια σύντομη δραστηριότητα που σε βοηθά να περάσεις στον προσωπικό σου χρόνο, όπως λίγα λεπτά ησυχίας ή έναν σύντομο περίπατο.',
+    next: 'Παρατήρησε ποια βάρδια σε δυσκόλεψε περισσότερο και τι σε βοήθησε να ξεκουραστείς. Κράτησε μία ιδέα για την επόμενη φορά.'
+  },
+  before_shift: {
+    today: 'Διάλεξε ένα πράγμα που μπορείς να προετοιμάσεις για την επόμενη βάρδια, όπως το γεύμα σου ή μια σύντομη λίστα προτεραιοτήτων.',
+    next: 'Αν ο χρόνος για διάλειμμα είναι συχνά περιορισμένος, μπορείς να συζητήσεις με την ομάδα πώς θα καλύπτεται το διάλειμμα στη βάρδια.'
+  },
+  recurring: {
+    today: 'Σημείωσε τι επαναλαμβάνεται και ποια συγκεκριμένη αλλαγή θα σε βοηθούσε, όπως διαφορετική κατανομή εργασιών ή λιγότερες διαδοχικές βάρδιες.',
+    next: 'Αν αισθάνεσαι άνετα, συζήτησε την αλλαγή με ένα πρόσωπο εμπιστοσύνης ή με τον αρμόδιο για το πρόγραμμα. Μπορείς επίσης να ανοίξεις τη διαδρομή ανθρώπινης υποστήριξης.'
+  }
+};
+
+byId('guidance-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const card = guidanceCards[byId('guidance-topic').value];
+  byId('guidance-today').textContent = card.today;
+  byId('guidance-next').textContent = card.next;
+  byId('guidance-result').hidden = false;
+  byId('guidance-status').textContent = 'Εμφανίστηκαν δύο ενδεικτικές κατευθύνσεις.';
+});
+byId('guidance-topic').addEventListener('change', () => {
+  byId('guidance-result').hidden = true;
+  byId('guidance-status').textContent = '';
+});
+
+const demoStart = byId('support-demo-start');
+const demoChat = byId('support-demo-chat');
+const demoChatStatus = byId('support-demo-chat-status');
+const demoBookingStatus = byId('support-demo-book-status');
+const demoSlot = byId('support-demo-slot');
+
+demoStart.addEventListener('click', () => {
+  demoChatStatus.textContent = '';
+  demoChat.hidden = false;
+  byId('support-demo-end').focus();
+  demoStart.hidden = true;
+});
+byId('support-demo-end').addEventListener('click', () => {
+  demoStart.hidden = false;
+  demoStart.focus();
+  demoChat.hidden = true;
+  demoChatStatus.textContent = 'Η δοκιμαστική συνομιλία ολοκληρώθηκε.';
+});
+byId('support-demo-book').addEventListener('submit', event => {
+  event.preventDefault();
+  if (!demoSlot.value) return;
+  demoBookingStatus.textContent = 'Καταχωρίστηκε δοκιμαστικό αίτημα για: ' + demoSlot.value + '. Δεν έγινε πραγματική κράτηση.';
+});
+demoSlot.addEventListener('change', () => {
+  demoBookingStatus.textContent = '';
+});
+</script>
+<script>
+(function(root){
+'use strict';
+const profiles={
+ stable:{sleep:[7.2,7.3],steps:[6400,6500],pulse:[64,63],coverage:.94,days:7},
+ strain:{sleep:[5.5,7.3],steps:[3900,6500],pulse:[72,63],coverage:.91,days:7},
+ discordant:{sleep:[5.5,7.3],steps:[3900,6500],pulse:[72,63],coverage:.93,days:7},
+ missing:{sleep:null,steps:[3900,6500],pulse:null,coverage:.28,days:2}
+};
+const clamp=x=>Math.min(1,Math.max(0,x));
+function fuse(p,s){
+ if(!s||![s.fatigue,s.mood,s.function].every(v=>Number.isInteger(v)&&v>=1&&v<=5))return {state:'invalid'};
+ const self=((s.fatigue-1)+(5-s.mood)+(5-s.function))/12;
+ if(!p||p.coverage<.7||p.days<5||![p.sleep,p.steps,p.pulse].every(a=>Array.isArray(a)&&a.length===2&&a.every(Number.isFinite)&&a[1]>0))return {state:'insufficient',self};
+ const memberships=[clamp((1-p.sleep[0]/p.sleep[1])/.25),clamp((1-p.steps[0]/p.steps[1])/.4),clamp((p.pulse[0]-p.pulse[1])/10)];
+ const wearable=memberships.reduce((a,b)=>a+b,0)/3;
+ if(Math.abs(wearable-self)>.5)return {state:'discordant',memberships,wearable,self};
+ const combined=(wearable+self)/2;
+ return {state:combined>=.55?'change':'stable',memberships,wearable,self,combined};
+}
+root.EvvardiaQol={profiles,fuse,version:'fuzzy-demo-0.1',validatedModelEnabled:false};
+if(typeof module!=='undefined')module.exports=root.EvvardiaQol;
+})(typeof window==='undefined'?globalThis:window);
+
+</script><script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id), E=window.EvvardiaQol;
+let record=null;
+for(const id of ['qol-fatigue','qol-mood','qol-function'])for(let i=1;i<=5;i++)$(id).add(new Option(String(i),String(i)));
+function clear(){record=null;$('qol-result').hidden=true;$('qol-export').disabled=true;$('qol-export-status').textContent='Καμία αποστολή ή αποθήκευση δεδομένων αυτής της ενότητας. Η εξαγωγή γίνεται μόνο στη συσκευή σου.';}
+function showProfile(){clear();$('qol-form').reset();const p=E.profiles[$('qol-profile').value];const box=$('qol-sensors');box.replaceChildren();const rows=[['Ύπνος (ώρες)',p.sleep],['Βήματα / ημέρα',p.steps],['Παλμοί ηρεμίας (bpm)',p.pulse]];for(const [label,v]of rows){const el=document.createElement('p');el.textContent=label+': '+(v?v[0]+' · προσωπική αναφορά '+v[1]:'Μη διαθέσιμο');box.append(el);}const el=document.createElement('p');el.textContent='Κάλυψη επίδειξης: '+Math.round(p.coverage*100)+'% · '+p.days+'/7 ημέρες';box.append(el);}
+$('qol-profile').addEventListener('change',showProfile);
+$('qol-form').addEventListener('change',clear);
+$('qol-reset').addEventListener('click',()=>{$('qol-form').reset();clear();});
+$('qol-form').addEventListener('submit',e=>{e.preventDefault();const key=$('qol-profile').value,p=E.profiles[key],s={fatigue:Number($('qol-fatigue').value),mood:Number($('qol-mood').value),function:Number($('qol-function').value)},r=E.fuse(p,s);if(r.state==='invalid')return;
+ const messages={stable:'Μικρές συνδυαστικές μεταβολές στο συνθετικό παράδειγμα. Αυτό δεν αποκλείει δυσκολίες που δεν καταγράφονται από το ρολόι.',change:'Οι πηγές του συνθετικού παραδείγματος συγκλίνουν σε μεταβολή που αξίζει συζήτηση. Αντανακλά αυτό το πώς αισθάνεσαι; Μπορείς να εξετάσεις τις διαθέσιμες επιλογές υποστήριξης.',discordant:'Οι καταγραφές και η αυτοαναφορά διαφέρουν. Δεν παράγεται συνολική εκτίμηση. Εξέτασε αν υπήρξαν βάρδιες, άσκηση, αλλαγές ρουτίνας ή δυσκολίες μέτρησης.',insufficient:'Ανεπαρκή δεδομένα wearable. Δεν παράγεται συνδυαστική εκτίμηση. Η αυτοαναφορά παραμένει διαθέσιμη και η έλλειψη δεδομένων δεν σημαίνει καλή ευεξία.'};
+ const box=$('qol-result');box.replaceChildren();const title=document.createElement('strong');title.textContent='Αποτέλεσμα κανόνων επίδειξης — όχι βαθμολογία ποιότητας ζωής';const text=document.createElement('p');text.textContent=messages[r.state];box.append(title,text);if(r.memberships){const why=document.createElement('p');why.textContent='Στοιχεία που εξετάστηκαν: μεταβολές ύπνου, δραστηριότητας και παλμών, μαζί με κόπωση, διάθεση και λειτουργικότητα. Τα όρια είναι ενδεικτικά, χωρίς κλινική επικύρωση.';box.append(why);}box.hidden=false;
+ record={schema_version:'evvardia-qol-demo-0.1',synthetic:true,profile_id:key,generated_at:new Date().toISOString(),window_days:7,baseline_days:14,valid_days:p.days,coverage:p.coverage,sleep_hours:p.sleep?.[0]??'',baseline_sleep_hours:p.sleep?.[1]??'',steps:p.steps?.[0]??'',baseline_steps:p.steps?.[1]??'',resting_hr:p.pulse?.[0]??'',baseline_resting_hr:p.pulse?.[1]??'',fatigue:s.fatigue,mood:s.mood,function:s.function,rule_version:E.version,rule_state:r.state,qol_prediction:'',reference_instrument:'',reference_score:'',reference_date:'',reference_window_start:'',reference_window_end:'',reference_status:'not_collected',validated_model_enabled:false};$('qol-export').disabled=false;
+});
+$('qol-export').addEventListener('click',()=>{if(!record)return;const quote=v=>'"'+String(v).replaceAll('"','""')+'"';const csv='\uFEFF'+Object.keys(record).map(quote).join(',')+'\r\n'+Object.values(record).map(quote).join(',')+'\r\n';const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Evvardia_QoL_SYNTHETIC.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('qol-export-status').textContent='Εξήχθη συνθετική εγγραφή. Τα πεδία ερωτηματολογίου και πρόβλεψης παραμένουν κενά: δεν έχουν συλλεχθεί ή υπολογιστεί.';});
+showProfile();
+})();
+
+</script>
+<script>
+
+(function(){
+'use strict';
+const by=id=>document.getElementById(id), panel=by('avatar-panel'),toggle=by('avatar-toggle'),speak=by('avatar-speak'),stop=by('avatar-stop'),mute=by('avatar-mute'),go=by('avatar-go'),message=by('avatar-message'),status=by('avatar-status'),figure=by('avatar-figure');
+const synth=window.speechSynthesis;let muted=false,current=null,target=null,voice=null;
+const topics={
+checkin:{target:'checkinTitle',text:'Στο καθημερινό check-in επιλέγεις ημερομηνία και απαντάς σε τρεις σύντομες ερωτήσεις για εξάντληση, ύπνο και φόρτο. Στη συνέχεια πατάς Καταχώριση. Οι δοκιμαστικές απαντήσεις διαγράφονται με την ανανέωση της σελίδας.'},
+wellbeing:{target:'qol-title',text:'Στην ενότητα ευεξίας επιλέγεις ένα συνθετικό προφίλ και απαντάς για κόπωση, διάθεση και λειτουργικότητα. Η σύνθεση εξηγεί τις μεταβολές, την ασυμφωνία ή την έλλειψη δεδομένων. Δεν είναι επικυρωμένη βαθμολογία ποιότητας ζωής.'},
+guidance:{target:'guidance-title',text:'Στις συμβουλές υποστήριξης επιλέγεις τι σε απασχολεί και βλέπεις ενδεικτικές κάρτες γενικής καθοδήγησης. Πρόκειται για προκαθορισμένο περιεχόμενο επίδειξης, όχι εξατομικευμένη θεραπεία.'},
+support:{target:'supportTitle',text:'Η ανθρώπινη υποστήριξη παρουσιάζει τα σενάρια Διαθέσιμος ειδικός τώρα και Ζήτησε ραντεβού. Τα προφίλ είναι συνθετικά: δεν συνδέεσαι με πραγματικό ειδικό και δεν κλείνεις πραγματικό ραντεβού. Για πραγματική ανάγκη απευθύνσου στην υπηρεσία υποστήριξής σου.'}
+};
+function finish(u){if(current!==u)return;current=null;figure.classList.remove('avatar-speaking');stop.disabled=true;}
+function cancel(){const u=current;current=null;if(u&&synth)synth.cancel();figure.classList.remove('avatar-speaking');stop.disabled=true;}
+function refresh(){voice=synth?.getVoices().find(v=>/^el(?:-|_)/i.test(v.lang)&&v.localService)??null;speak.disabled=muted||!voice;if(!voice)status.textContent='Δεν βρέθηκε διαθέσιμη τοπική ελληνική φωνή. Μπορείς να χρησιμοποιήσεις όλες τις γραπτές οδηγίες.';else status.textContent=muted?'Η φωνή είναι σε σίγαση.':'Διαθέσιμη ελληνική φωνή στη συσκευή. Πάτησε Άκουσε την οδηγία για εκφώνηση.';}
+toggle.addEventListener('click',()=>{const hide=!panel.hidden;cancel();panel.hidden=hide;toggle.setAttribute('aria-expanded',String(!hide));toggle.textContent=hide?'Εμφάνιση ψηφιακού βοηθού':'Απόκρυψη βοηθού';});
+for(const button of document.querySelectorAll('[data-avatar-topic]'))button.addEventListener('click',()=>{cancel();const t=topics[button.dataset.avatarTopic];target=t.target;message.textContent=t.text;go.hidden=false;status.textContent='Η οδηγία ενημερώθηκε. Μπορείς να την ακούσεις ή να μεταβείς στην ενότητα.';});
+go.addEventListener('click',()=>{cancel();const el=by(target);if(el){el.focus();el.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}});
+speak.addEventListener('click',()=>{refresh();if(muted||!voice||typeof window.SpeechSynthesisUtterance!=='function')return;cancel();const u=new SpeechSynthesisUtterance(message.textContent);u.lang='el-GR';u.voice=voice;u.rate=.95;current=u;u.onstart=()=>{if(current===u){figure.classList.add('avatar-speaking');stop.disabled=false;status.textContent='Εκφώνηση οδηγίας.';}};u.onend=()=>{if(current===u){finish(u);status.textContent='Η εκφώνηση ολοκληρώθηκε.';}};u.onerror=()=>{if(current===u){finish(u);status.textContent='Η εκφώνηση δεν ήταν διαθέσιμη. Η γραπτή οδηγία παραμένει στην οθόνη.';}};synth.cancel();synth.speak(u);stop.disabled=false;});
+stop.addEventListener('click',()=>{cancel();status.textContent='Η εκφώνηση διακόπηκε.';});
+mute.addEventListener('click',()=>{muted=!muted;cancel();mute.setAttribute('aria-pressed',String(muted));mute.textContent=muted?'Ενεργοποίηση φωνής':'Σίγαση φωνής';refresh();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)cancel();});window.addEventListener('pagehide',cancel);
+for(const id of ['voice-read','voice-listen'])by(id)?.addEventListener('click',cancel,true);
+synth?.addEventListener('voiceschanged',refresh);refresh();
+})();
+
+</script>
+</body>
+</html>
