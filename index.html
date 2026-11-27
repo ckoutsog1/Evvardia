@@ -85,9 +85,10 @@ const byId = id => document.getElementById(id);
 const form = byId('checkin');
 const date = byId('date');
 const day = offset => {
-  const now = new Date();
-  now.setDate(now.getDate() - 6 + offset);
-  return new Intl.DateTimeFormat('sv-SE').format(now);
+  const local = new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Athens'}).format(new Date());
+  const now = new Date(local+'T12:00:00Z');
+  now.setUTCDate(now.getUTCDate() - 6 + offset);
+  return now.toISOString().slice(0,10);
 };
 const dayLabel = value => value.slice(8) + '/' + value.slice(5,7);
 let entries = new Map();
@@ -108,7 +109,7 @@ function render() {
   const summary = sorted.length < 3
     ? 'Οι καταγραφές είναι λίγες για επισκόπηση της μεταβολής.'
     : 'Η εξάντληση στην πρώτη καταγραφή ήταν ' + sorted[0][1][0] + '/5 και στην πιο πρόσφατη ' + latest[0] + '/5.';
-  byId('trend').textContent = summary + ' Καταγραφές: ' + sorted.length + ' από 7 ημέρες.';
+  byId('trend').textContent = summary + ' Καταγραφές συνολικά: ' + sorted.length + '.';
   byId('bars').innerHTML = sorted.map(([key, [score]]) =>
     '<li><span>' + dayLabel(key) + '</span><meter min="0" max="5" value="' + score +
     '" aria-label="Εξάντληση ' + dayLabel(key) + '"></meter><span>' + score + '/5</span></li>'
@@ -152,18 +153,23 @@ byId('supportLink').addEventListener('click', () => {
 document.querySelectorAll('[data-route]').forEach(button => {
   button.addEventListener('click', () => showRoute(button.dataset.route));
 });
-form.addEventListener('submit', event => {
+form.addEventListener('submit', async event => {
   event.preventDefault();
   const data = new FormData(form);
   const key = data.get('date');
   const scores = questions.map(([field]) => Number(data.get(field)));
   if (!Array.from({length:7}, (_, offset) => day(offset)).includes(key) ||
       scores.some(score => !Number.isInteger(score) || score < 1 || score > 5)) return;
-  const replaced = entries.has(key);
-  entries.set(key, scores);
-  recordStudyEvent('checkin', {day:key});
-  render();
-  byId('status').textContent = replaced ? 'Η καταγραφή της ημέρας ενημερώθηκε.' : 'Η δοκιμαστική καταγραφή προστέθηκε.';
+  const button=form.querySelector('button[type=submit]');button.disabled=true;
+  byId('status').textContent='Αποστολή απαντήσεων…';
+  try {
+    await window.persistCheckin(key,scores);
+    entries.set(key,scores);render();
+    recordStudyEvent('checkin', {day:key});
+    byId('status').textContent='Οι απαντήσεις αποθηκεύτηκαν στη βάση.';
+  } catch(error){byId('status').textContent=error.message;}
+  finally{button.disabled=false;}
+
 });
 
 const wearableDemo = {
@@ -362,5 +368,6 @@ byId('questions').addEventListener('change', stopVoice);
 voicePanel.addEventListener('toggle', () => { if (!voicePanel.open) stopVoice(); });
 checkLocalSpeech();
 </script>
+<script src="/bat_items.js"></script><script src="/persistence.js"></script>
 </body>
 </html>

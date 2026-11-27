@@ -12,6 +12,7 @@ import secrets
 import sqlite3
 
 import guidance
+import research_store
 
 GUIDANCE = None
 
@@ -49,6 +50,8 @@ def initialize():
         CREATE UNIQUE INDEX IF NOT EXISTS first_checkin
         ON event(code, checkin_date) WHERE event_type='checkin_submitted';
         """)
+
+        research_store.initialize(db)
 
 
 class App(BaseHTTPRequestHandler):
@@ -92,6 +95,15 @@ class App(BaseHTTPRequestHandler):
                     end = content.index('<!-- guidance-end -->') + len('<!-- guidance-end -->')
                     content = content[:start] + content[end:]
             self.respond(200, content.encode(), 'text/html; charset=utf-8')
+        elif self.path == '/api/records':
+            with connect() as db:
+                code = self.participant(db)
+                if not code:
+                    return self.json(401, {'error':'login_required'})
+                data = research_store.records(db,code)
+            return self.json(200, {'records':data})
+        elif self.path in ('/persistence.js','/bat_items.js'):
+            self.respond(200, (ROOT / self.path.lstrip('/')).read_bytes(), 'text/javascript; charset=utf-8')
         elif self.path == '/study.js' or (self.path == '/guidance.js' and GUIDANCE is not None):
             self.respond(200, (ROOT / self.path.lstrip('/')).read_bytes(), 'text/javascript; charset=utf-8')
         else:
@@ -102,13 +114,15 @@ class App(BaseHTTPRequestHandler):
             return self.json(403, {'error': 'origin'})
         try:
             size = int(self.headers.get('Content-Length', '0'))
-            if self.headers.get_content_type() != 'application/json' or not 0 < size <= 1024:
+            if self.headers.get_content_type() != 'application/json' or not 0 < size <= 4096:
                 raise ValueError()
             body = json.loads(self.rfile.read(size))
             if not isinstance(body, dict):
                 raise ValueError()
         except (ValueError, UnicodeError):
             return self.json(400, {'error': 'invalid_request'})
+        if self.path in ('/api/checkins','/api/bat'):
+            return self.save_response(body)
         if self.path == '/guidance':
             return self.guidance_request(body)
         if self.path == '/login':
@@ -123,6 +137,24 @@ class App(BaseHTTPRequestHandler):
                     db.execute('DELETE FROM session WHERE token_hash=?', (digest(token.value),))
             return self.json(200, {}, 'evvardia_session=; Max-Age=0; Path=/; HttpOnly; SameSite=Strict')
         return self.json(404, {'error': 'not_found'})
+
+    def save_response(self, body):
+        try:
+            with connect() as db:
+                code = self.participant(db)
+                if not code:
+                    return self.json(401, {'error':'login_required'})
+                if self.headers.get('X-Study-Participant') != code:
+                    return self.json(403, {'error':'different_participant'})
+                result = research_store.save(db,code,'checkin' if self.path=='/api/checkins' else 'bat23',body)
+            # Acknowledge only after the transaction has committed.
+            return self.json(200 if result['duplicate'] else 201,result)
+        except research_store.Conflict as error:
+            return self.json(409, {'error':str(error)})
+        except (ValueError, TypeError, AttributeError):
+            return self.json(400, {'error':'invalid_response'})
+        except sqlite3.Error:
+            return self.json(503, {'error':'storage_unavailable'})
 
     def guidance_request(self, body):
         if GUIDANCE is None:
@@ -203,6 +235,9 @@ def main():
     serve.add_argument('--port', type=int, default=8765)
     participant = cmds.add_parser('add')
     participant.add_argument('code')
+    participant.add_argument('--center', choices=['A','B','C'])
+    responses = cmds.add_parser('export-responses')
+    responses.add_argument('path')
     export = cmds.add_parser('export')
     export.add_argument('path')
     ARGS = parser.parse_args()
@@ -212,18 +247,22 @@ def main():
             GUIDANCE = guidance.configuration()
         except (OSError, ValueError, KeyError) as error:
             parser.error(f'Invalid guidance configuration: {error}')
+        httpd = ThreadingHTTPServer(('127.0.0.1', ARGS.port), App)
         print(f'http://127.0.0.1:{ARGS.port}', flush=True)
-        ThreadingHTTPServer(('127.0.0.1', ARGS.port), App).serve_forever()
+        httpd.serve_forever()
     elif ARGS.command == 'add':
         if not re.fullmatch(r'[A-Z0-9][A-Z0-9_-]{2,31}', ARGS.code):
             parser.error('Use a synthetic code such as TEST-001.')
         secret = secrets.token_urlsafe(24)
         try:
             with connect() as db:
-                db.execute('INSERT INTO participant VALUES (?,?)', (ARGS.code,digest(secret)))
+                db.execute('INSERT INTO participant(code,access_hash,center_id) VALUES (?,?,?)', (ARGS.code,digest(secret),ARGS.center))
         except sqlite3.IntegrityError:
             parser.error('Participant code already exists.')
         print(secret)
+    elif ARGS.command == 'export-responses':
+        with connect() as db, open(ARGS.path, 'x', newline='', encoding='utf-8-sig') as output:
+            research_store.export(db,output)
     else:
         with connect() as db, open(ARGS.path, 'x', newline='', encoding='utf-8-sig') as output:
             writer = csv.writer(output)
